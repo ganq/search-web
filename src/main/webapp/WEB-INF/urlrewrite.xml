@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
+        "http://www.tuckey.org/res/dtds/urlrewrite4.0.dtd">
+
+<urlrewrite>
+
+   <!-- <rule>
+        <from>^/$</from>
+        <to>/bidding.html</to>
+    </rule>
+    -->
+    <rule>
+        <from>^/bidding.html$</from>
+        <to>/announcements</to>
+    </rule>
+    
+    <rule>
+        <from>^/bidding/([a-zA-Z0-9]+).html$</from>
+        <to>/announcements?codeKeyLevel1=$1</to>
+    </rule>
+    
+    <rule>
+        <from>^/bidding/([a-zA-Z0-9]+)-([0-9]+).html$</from>
+        <to>/announcements?codeKeyLevel1=$1&amp;codelevel2=$2</to>
+    </rule>
+    
+    <rule>
+        <from>^/bidding/([a-zA-Z0-9]+)-([0-9]+)-([0-9]+).html$</from>
+        <to>/announcements?codeKeyLevel1=$1&amp;codelevel2=$2&amp;codelevel3=$3</to>
+    </rule>
+
+
+    <rule>
+        <from>^/zm.html$</from>
+        <to>/recruit</to>
+    </rule>
+
+    <rule>
+        <from>^/zm/([a-zA-Z0-9]+).html$</from>
+        <to>/recruit?codeKeyLevel1=$1</to>
+    </rule>
+
+    <rule>
+        <from>^/zm/([a-zA-Z0-9]+)-([0-9]+).html$</from>
+        <to>/recruit?codeKeyLevel1=$1&amp;codelevel2=$2</to>
+    </rule>
+
+    <rule>
+        <from>^/zm/([a-zA-Z0-9]+)-([0-9]+)-([0-9]+).html$</from>
+        <to>/recruit?codeKeyLevel1=$1&amp;codelevel2=$2&amp;codelevel3=$3</to>
+    </rule>
+        
+            
+    <rule>
+    	<from>^/supplier.html$</from>
+    	<to>/supplier</to>
+    </rule>
+    
+    <rule>
+    	<from>^/supplier/([a-zA-Z0-9]+).html$</from>
+    	<to>/supplier?codeKeyLevel1=$1</to>
+    </rule>
+    
+    <rule>
+    	<from>^/supplier/([a-zA-Z0-9]+)-([0-9]+).html$</from>
+    	<to>/supplier?codeKeyLevel1=$1&amp;codelevel2=$2</to>
+    </rule>
+   
+    <rule>
+    	<from>^/supplier/([a-zA-Z0-9]+)-([0-9]+)-([0-9]+).html$</from>
+    	<to>/supplier?codeKeyLevel1=$1&amp;codelevel2=$2&amp;codelevel3=$3</to>
+    </rule>
+    
+    <rule>
+    	<from>^/developer.html$</from>
+    	<to>/developer</to>
+    </rule>
+</urlrewrite>
