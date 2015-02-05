@@ -3,13 +3,12 @@ package com.mysoft.b2b.search.util;
 import com.mysoft.b2b.basicsystem.settings.api.DictionaryService;
 import com.mysoft.b2b.basicsystem.settings.api.Region;
 import com.mysoft.b2b.basicsystem.settings.api.RegionNode;
-import com.mysoft.b2b.bizsupport.api.*;
+import com.mysoft.b2b.bizsupport.api.BasicCategory;
+import com.mysoft.b2b.bizsupport.api.OperationCategoryService;
 import com.mysoft.b2b.bizsupport.api.OperationCategoryService.DataType;
 import com.mysoft.b2b.cms.api.AdInfoDo;
 import com.mysoft.b2b.cms.api.AdpositionService;
-import com.mysoft.b2b.search.param.AnnouncementParam;
 import com.mysoft.b2b.search.param.BaseParam;
-import com.mysoft.b2b.search.param.RecruitParam;
 import com.mysoft.b2b.search.param.SearchLocation;
 import com.mysoft.b2b.search.vo.SearchCategoryVO;
 import com.mysoft.b2b.sso.api.OnlineService;
@@ -23,7 +22,6 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.*;
-import java.text.MessageFormat;
 import java.util.*;
 
 @SuppressWarnings("unused")

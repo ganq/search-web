@@ -329,11 +329,12 @@
 					<ul class="supplier_list">
 					<c:forEach items="${searchResult}" var="elem">
 					<li>
+                        <div class="supplier_tlt">
+                            <h3><c:if test="${not empty elem.supplierType }"><i>${elem.supplierType }</i></c:if><a href="${empty elem.supplierUrl?'javascript:;':elem.supplierUrl }" target="_blank">${elem.companyName}</a></h3>
+                            <div class="supplier_honor"><c:if test="${not empty elem.defaultAward }">企业荣誉：${elem.defaultAward }</c:if></div>
+                        </div>
 						<div class="supplier_left">
-							<h3><c:if test="${not empty elem.supplierType }"><i>${elem.supplierType }</i></c:if><a href="${empty elem.supplierUrl?'javascript:;':elem.supplierUrl }" target="_blank">${elem.companyName}</a></h3>
-							<p class="supplier_split ${fn:length(fn:escapeXml(elem.legalName)) > 0 ? '':'no_corp' }">
-								<c:if test="${fn:length(fn:escapeXml(elem.legalName)) > 0 }"><span class="supplier_split_name">公司法人：${fn:escapeXml(elem.legalName) }</span></c:if>
-								<span class="supplier_split_date">成立年份：${fn:escapeXml(elem.establishYear) }</span>
+							<p class="supplier_split no_corp">
 								<span class="supplier_split_capital">注册资本：<c:if test="${elem.regCapital > 0 }">
 									<fmt:formatNumber value="${elem.regCapital }" pattern="#,###"/>万元<c:if test="${elem.currency ne '人民币'}">(${elem.currency})</c:if>
 								</c:if>
@@ -341,6 +342,7 @@
                                     无需验资
                                 </c:if>
 								</span>
+                                <span class="supplier_split_area">服务区域：${empty elem.projectLocation?'无':t:splitHlField(t:collectionJoinToString(elem.projectLocation,"、")) }</span>
 							</p>
 							<p class="service">业务范围：<c:if test="${not empty supplierParam.keyword }">
 								${empty elem.businessScope?'无':t:cutHtmlStr(t:splitHlField(elem.businessScope),40) }
@@ -350,7 +352,6 @@
 							</c:if>
 							  
 							</p>
-							<p class="area">服务区域：${empty elem.projectLocation?'无':t:splitHlField(t:collectionJoinToString(elem.projectLocation,"、")) }</p>
 							<p class="address">公司地址：
 							<c:choose>
               					<c:when test="${empty elem.regProvinceName and  empty elem.regCityName}">无</c:when>
@@ -362,71 +363,108 @@
               				</p>
 						</div>
 						<div class="supplier_middle">
-							<dl class="supplier_aptitude">	
-								<c:if test="${empty elem.supplierType }">	
-								<c:set var="showQual" value="${false }"/>					
-								<c:if test="${t:listContains(elem.searchBasicCategoryName,'工程') or t:listContains(elem.searchBasicCategoryName,'勘察设计') or
-								t:listContains(elem.searchBasicCategoryName,'服务与咨询')}">
-									<dt><strong>资质</strong><span class="c_orange"> (${fn:length(elem.qualificationLevelName) })</span></dt>
-									<c:forEach var="elemQl" items="${t:setHlListSort(elem.qualificationLevelName) }" begin="0" end="1">
-										<dd title="${t:replaceHtml(elemQl) }">${elemQl }</dd>
-									</c:forEach>
-									<c:set var="showQual" value="${true }"/>
-								</c:if>								
-								<c:if test="${!showQual and (t:listContains(elem.searchBasicCategoryName,'材料') or t:listContains(elem.searchBasicCategoryName,'设备') or
-								t:listContains(elem.searchBasicCategoryName,'营销与行政'))}">
-									<dt><strong>产品</strong><span class="c_orange"> (${fn:length(elem.productName) })</span></dt>
-									<c:forEach var="elemQl" items="${t:setHlListSort(elem.productName) }" begin="0" end="1">
-										<dd title="${t:replaceHtml(elemQl) }">${elemQl }</dd>
-									</c:forEach>
-								</c:if>								
-								</c:if>
-								
-								<c:if test="${not empty elem.supplierType }">					
-								<c:if test="${elem.supplierType eq '服务' or elem.supplierType eq '工程'}">
-									<dt><strong>资质</strong><span class="c_orange"> (${fn:length(elem.qualificationLevelName) })</span></dt>
-									<c:forEach var="elemQl" items="${t:setHlListSort(elem.qualificationLevelName) }" begin="0" end="1">
-										<dd title="${t:replaceHtml(elemQl) }">${elemQl }</dd>
-									</c:forEach>
-									
-								</c:if>								
-								<c:if test="${elem.supplierType eq '厂商' or elem.supplierType eq '总代' or elem.supplierType eq '经销'}">
-									<dt><strong>产品</strong><span class="c_orange"> (${fn:length(elem.productName) })</span></dt>
-									<c:forEach var="elemQl" items="${t:setHlListSort(elem.productName) }" begin="0" end="1">
-										<dd title="${t:replaceHtml(elemQl) }">${elemQl }</dd>
-									</c:forEach>
-								</c:if>								
-								</c:if>
-							</dl>
-							<dl class="supplier_case">
-								<dt><strong>案例</strong><span class="c_orange"> (${fn:length(elem.projectName) })</span></dt>
-								<c:forEach var="elemPn" items="${elem.projectName }" begin="0" end="1">
-									<dd title="${t:escapeHtml(elemPn) }">${fn:escapeXml(elemPn) }</dd>
-								</c:forEach>
-							</dl>
+                            <ul>
+                                <li><div>产品<em>(${elem.productCount})</em></div></li>
+                                <li><div>案例<em>(${elem.projectCount})</em></div></li>
+                                <li><div>资质<em>(${fn:length(elem.qualificationLevelName) })</em></div></li>
+                                <li><div>荣誉<em>(${elem.awardCount})</em></div></li>
+                            </ul>
 						</div>
 						<div class="supplier_right">
-							<div class="supplier_status hover_show">
-								<div class="supplier_honner cardCanClick" style="cursor:pointer" data-url="${empty elem.supplierUrl?'':elem.supplierUrl }">${elem.defaultAward }<div>供应商旗舰店<span></span></div></div>
-							</div>
-							<div class="supplier_meta">
-							<c:if test="${elem.authTag }">
-								<span class="supplier_auth">明源审核</span>
-							</c:if>
-							<c:if test="${elem.medalLevel == 1 }">
-           						<span class="supplier_medal">金牌供应商</span>
-           					</c:if>
-           					<c:if test="${elem.medalLevel == 2 }">
-           						<span class="supplier_medal">银牌供应商</span>
-           					</c:if>
-           					<c:if test="${elem.medalLevel == 3 }">
-           						<span class="supplier_medal">铜牌供应商</span>
-           					</c:if>
-           					<c:if test="${elem.medalLevel == 0}">
-           						<span class="supplier_readed" data-pid="${elem.supplierId }">0人已关注</span>
-           					</c:if>
-							</div>
+                            <c:if test="${empty elem.userListDisplay}">
+                                <div class="supplier_status hover_show">
+                                    <a href="${empty elem.supplierUrl?'':elem.supplierUrl}" target="blank">
+                                        <div class="supplier_flag"><div>供应商旗舰店<span></span></div></div>
+                                    </a>
+                                </div>
+                                <div class="supplier_meta">
+                                    <c:if test="${elem.authTag }">
+                                        <span class="supplier_auth">明源审核</span>
+                                    </c:if>
+                                    <span class="supplier_readed" data-pid="${elem.supplierId }">0人已浏览</span>
+                                </div>
+                            </c:if>
+                            <c:if test="${not empty elem.userListDisplay}">
+                                <c:set var="firstUser" value="${elem.userListDisplay[0]}"/>
+
+                                <div class="user_info">
+
+                                    <div class="info">
+                                        <a href="<my:link domain="s.shop" uri="/${firstUser.userId}" />" target="_blank">
+                                        <div class="u_logo">
+                                            <c:if test="${not empty firstUser.headPhoto}">
+                                            <img src='<my:link domain="img.static" uri="/netdiskimg/user-card-logo/${firstUser.headPhoto}.150x150.jpg" />'>
+                                            </c:if>
+                                            <c:if test="${empty firstUser.headPhoto}">
+                                                <img src='<my:link domain="jcs.static" uri="/res1.5/img/common/head.png" />'>
+                                            </c:if>
+
+                                        </div>
+                                        </a>
+                                        <div class="u_info">
+                                            <div class="u_name">
+                                                <a href="<my:link domain="s.shop" uri="/${firstUser.userId}" />" target="_blank">
+                                                <strong>${firstUser.userName}</strong>&nbsp;<span>${firstUser.position}</span>
+                                                </a>
+                                            </div>
+                                            <p class="medals">
+                                                <a href="<my:link domain="member.center" uri="/medal/intro" />" target="_blank">
+                                                <c:if test="${firstUser.identityAuthentication}">
+                                                    <i class="m_icon identity" title="该会员已通过云采购普通认证"></i>
+                                                </c:if>
+                                                <c:if test="${firstUser.companyAuthentication}">
+                                                    <i class="m_icon company" title="云采购推荐您优先选择高级认证会员"></i>
+                                                </c:if>
+                                                <i class="m_icon complete${firstUser.dataCount}" title="该会员资料完整度${firstUser.dataScore > 100 ? 100 : firstUser.dataScore}分"></i>
+                                                <i class="m_icon level${firstUser.activeCount}" title="该会员近7天登录云采购${firstUser.activeCount}次"></i>
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <c:if test="${firstUser.inStorageCount > 0}">
+                                        <p title="该会员代表企业被${firstUser.honorLevel}家开发商纳入品牌供应商库">
+                                            <label>入库次数：</label><a href="<my:link domain="member.center" uri="/medal/intro" />" target="_blank"><i class="m_star star${firstUser.honorLevel}"></i></a>
+                                        </p>
+                                    </c:if>
+                                    <c:if test="${firstUser.awardBidCount > 0}">
+                                        <p title="该会员与开发商合作，成功中标${firstUser.transactionLevel}次">
+                                            <label>中标次数：</label><a href="<my:link domain="member.center" uri="/medal/intro" />" target="_blank"><i class="m_crown crown${firstUser.transactionLevel}"></i></a>
+                                        </p>
+                                    </c:if>
+                                </div>
+
+                            </c:if>
 						</div>
+                        <c:if test="${not empty elem.userListDisplay && fn:length(elem.userListDisplay) > 1}">
+                            <div class="supplier_usermore">
+                                <span class="user_more">该企业还有&nbsp;<em>${fn:length(elem.userListDisplay)-1}</em>&nbsp;个联系人&gt;&gt;</span>
+                                <div class="user_list">
+                                    <c:forEach items="${elem.userListDisplay}" begin="1" var="sUser">
+                                        <p>
+                                            <span>
+                                                <a href="<my:link domain="s.shop" uri="/${sUser.userId}" />" target="_blank">${sUser.userName}<c:if test="${not empty sUser.position}">(${sUser.position})</c:if></a>
+                                            </span>
+                                            <span class="medals">
+                                                <a href="<my:link domain="member.center" uri="/medal/intro" />" target="_blank">
+                                                <c:if test="${sUser.identityAuthentication}">
+                                                    <i class="m_icon identity" title="该会员已通过云采购普通认证"></i>
+                                                </c:if>
+                                                <c:if test="${sUser.companyAuthentication}">
+                                                    <i class="m_icon company" title="云采购推荐您优先选择高级认证会员"></i>
+                                                </c:if>
+                                                <i class="m_icon complete${sUser.dataCount}" title="该会员资料完整度${sUser.dataScore > 100 ? 100 : sUser.dataScore}分"></i>
+                                                <i class="m_icon level${sUser.activeCount}" title="该会员近7天登录云采购${sUser.activeCount}次"></i>
+                                                <i class="m_icon star${sUser.honorLevel}" title="该会员代表企业被${sUser.honorLevel}家开发商纳入品牌供应商库"></i>
+                                                <i class="m_icon crown${sUser.transactionLevel}" title="该会员与开发商合作，成功中标${sUser.transactionLevel}次"></i>
+                                                </a>
+                                            </span>
+                                        </p>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </c:if>
+
 					</li>
 	            	</c:forEach>
 	            	</ul>
@@ -498,9 +536,9 @@
 				$("#level3CategoryDiv>div").scrollTop(parseInt("${scrollLength}",10));
 				
 				var pvUrl ='<my:link domain="portal" uri="/pv/query.do?pageId=${supplierIds}&pvType=supplier" />';
-				$.getJSON(pvUrl +"&callback=?",function(data) {
+                $.getJSON(pvUrl +"&callback=?",function(data) {
 					$(".supplier_list li .supplier_readed").each(function(k,v) {
-						$(this).text(data[$(this).data("pid")] + "人已关注");	
+						$(this).text(data[$(this).data("pid")] + "人已浏览");	
 					});
                 });
 

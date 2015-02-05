@@ -1,17 +1,13 @@
 package com.mysoft.b2b.search.controller;
 
 import com.mysoft.b2b.bizsupport.api.DomainService;
-import com.mysoft.b2b.commons.FileUtil;
 import com.mysoft.b2b.commons.taglib.DomainTag;
 import com.mysoft.b2b.search.api.DeveloperSearchService;
 import com.mysoft.b2b.search.param.DeveloperParam;
 import com.mysoft.b2b.search.util.CommonUtil;
 import com.mysoft.b2b.search.util.TDKUtil;
 import com.mysoft.b2b.search.vo.DeveloperVO;
-import com.mysoft.b2b.sso.api.OnlineService;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.glassfish.grizzly.utils.StringEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

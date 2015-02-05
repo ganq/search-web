@@ -61,17 +61,35 @@
 									<img src='<my:link domain="jcs.static" uri="/res1.5/img/developer/global/company_default.gif"/>' alt="${t:replaceHtml(elem.developerName) }"/>
 								</c:if>
 		          			</a>
-		          			<c:if test="${!(elem.biddingCount <= 0 and  elem.biddingHistoryCount <= 0)}"> 
+		          			<c:if test="${elem.biddingCount > 0 or  elem.biddingHistoryCount > 0 or elem.recruitCount > 0}">
 		          			<p>
-				              <c:if test="${elem.biddingCount > 0 }">
-									<label>正在招标：</label><span><strong>${elem.biddingCount }</strong>条</span>&nbsp;&nbsp;
-								</c:if>
-								<label>历史招标：</label><span><c:if test="${elem.biddingHistoryCount > 0 }"><strong>${elem.biddingHistoryCount }</strong>条</c:if></span>
+                                <c:if test="${elem.recruitCount > 0 }">
+                                    <label>正在招募：</label><span><strong>${elem.recruitCount }</strong>条</span>&nbsp;&nbsp;
+                                    <c:if test="${elem.biddingCount > 0 }">
+                                        <label>正在招标：</label><span><strong>${elem.biddingCount }</strong>条</span>&nbsp;&nbsp;
+                                    </c:if>
+                                    <c:if test="${elem.biddingCount <= 0 and elem.biddingHistoryCount > 0}">
+                                        <label>历史招标：</label><span><strong>${elem.biddingHistoryCount }</strong>条</span>
+                                    </c:if>
+                                </c:if>
+                                <c:if test="${elem.recruitCount <= 0 }">
+                                    <c:if test="${elem.biddingCount > 0 }">
+                                        <label>正在招标：</label><span><strong>${elem.biddingCount }</strong>条</span>&nbsp;&nbsp;
+                                    </c:if>
+                                    <c:if test="${elem.biddingHistoryCount > 0 }">
+								        <label>历史招标：</label><span><strong>${elem.biddingHistoryCount }</strong>条</span>
+                                    </c:if>
+                                </c:if>
 				            </p>
 				            </c:if>
 						</div>
 						<div class="developer_cont">
-							<h3><a target="_blank" href="${empty elem.developerUrl?'javascript:;':elem.developerUrl }"  title="${t:replaceHtml(elem.developerName) }">${elem.developerName}</a></h3>
+							<h3>
+                                <a target="_blank" href="${empty elem.developerUrl?'javascript:;':elem.developerUrl }"  title="${t:replaceHtml(elem.developerName) }">${elem.developerName}</a>
+                                <c:if test="${elem.authorize}">
+                                    <a target="_blank" href="${elem.developerUrl}warrant.html" class="m_icon accredit" title="明源云采购已获得该开发商独家授权"></a>
+                                </c:if>
+                            </h3>
 							<p class="projects"><label>项目信息<c:if test="${not empty elem.projectInfo }">（${elem.projectCount }个）</c:if>：</label>
 							<span>
 							<c:if test="${not empty developerParam.keyword }">

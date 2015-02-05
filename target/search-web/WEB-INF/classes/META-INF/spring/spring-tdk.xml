@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="tdkUtil" class="com.mysoft.b2b.search.util.TDKUtil">
+        <property name="biddingCategory" ref="biddingCategory"/>
+        <property name="biddingRoot" ref="biddingRoot"/>
+        <property name="biddingWithKeyword" ref="biddingWithKeyword"/>
+
+        <property name="supplierCategory" ref="supplierCategory"/>
+        <property name="supplierRoot" ref="supplierRoot"/>
+        <property name="supplierWithKeyword" ref="supplierWithKeyword"/>
+
+        <property name="recruitCategory" ref="recruitCategory"/>
+        <property name="recruitRoot" ref="recruitRoot"/>
+        <property name="recruitWithKeyword" ref="recruitWithKeyword"/>
+
+        <property name="developerRoot" ref="developerRoot"/>
+        <property name="developerWithKeyword" ref="developerWithKeyword"/>
+
+    </bean>
+
+    <bean id="biddingCategory" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="{0} - {0}招标|采购 - 明源云采购" />
+        <property name="desc" value="明源云采购{0}招标信息频道是房地产开发商发布{0}采购计划、{0}招标预告、{0}中标公告的唯一通道，旨在满足开发商招标需求及供应商投标需求，让供需双方精准匹配，实现高效快捷的招投标。" />
+        <property name="keyword" value="{0},{0}招标,{0}招标公告,{0}采购" />
+    </bean>
+    <bean id="biddingRoot" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="招标搜索|招投标|采购信息搜索 - 明源云采购" />
+        <property name="desc" value="明源云采购招标搜索频道，为您提供房地产招标信息、地产采购、在建项目招标采购等信息检索服务。" />
+        <property name="keyword" value="招标搜索,采购搜索,招投标搜索" />
+    </bean>
+    <bean id="biddingWithKeyword" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="{0}-明源云采购" />
+        <property name="desc" value="找{0}，明源云采购为您提供{0}等信息和服务。" />
+        <property name="keyword" value="{0}" />
+    </bean>
+
+    <bean id="supplierRoot" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="供应商信息搜索|材料供应商搜索|设备|工程|服务供应商搜索 - 明源云采购" />
+        <property name="desc" value="明源云采购找供应商搜索频道，为您提供材料供应商、设备供应商、工程供应商、服务供应商等房地产供应商信息检索服务。" />
+        <property name="keyword" value="找供应商,找供应商信息,供应商信息搜索,材料供应商搜索,设备供应商搜索,工程供应商搜索,服务供应商搜索" />
+    </bean>
+
+    <bean id="supplierCategory" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="找优质{0}供应商 - {0}公司|{0}企业黄页|网站 - 明源云采购" />
+        <property name="desc" value="找优质{0}供应商，明源云采购拥有全国数万家精准房地产供应商数据库，提供{0}供应商,{0}公司,{0}企业,{0}黄页,{0}网站等信息，您可以关注符合企业招标要求的{0}供应商旗舰店，将其纳入到公司的供应商库。);" />
+        <property name="keyword" value="{0}供应商,{0}公司,{0}企业,{0}黄页,{0}网站" />
+    </bean>
+
+    <bean id="supplierWithKeyword" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="{0}-明源云采购" />
+        <property name="desc" value="找{0}，明源云采购为您提供{0}等信息和服务。" />
+        <property name="keyword" value="{0}" />
+    </bean>
+
+    <bean id="recruitRoot" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="招募信息搜索- 明源云采购" />
+        <property name="desc" value="明源云采购招募搜索频道，为您提供房地产招募信息、在建项目招募等信息检索服务。" />
+        <property name="keyword" value="招募信息搜索,招募搜索,寻源搜索,征集搜索" />
+    </bean>
+
+    <bean id="recruitCategory" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="{0}招募|{0}供应商招募|招募信息|招募活动 - 明源云采购" />
+        <property name="desc" value="明源云采购{0}招募信息频道是房地产开发商发布{0}招募计划、{0}招募活动、{0}供应商招募的唯一通道，旨在满足开发商招募需求及供应商报名需求，让供需双方精准匹配，实现高效快捷的招募计划。" />
+        <property name="keyword" value="{0}招募,{0}招募信息,{0}招募活动,{0}供应商招募" />
+    </bean>
+
+    <bean id="recruitWithKeyword" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="{0}-明源云采购" />
+        <property name="desc" value="找{0}，明源云采购为您提供{0}等信息和服务。" />
+        <property name="keyword" value="{0}" />
+    </bean>
+
+    <bean id="developerRoot" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="找房地产开发商-开发商项目|招标信息|采购信息-明源云采购" />
+        <property name="desc" value="明源云采购汇聚了全国房地产开发商企业，供应商可以访问开发商企业专区，查询项目信息、采购计划、招标信息和中标公告等，并可关注全国知名房地产开发商企业旗舰店。" />
+        <property name="keyword" value="房地产开发商,开发商,开发商项目,开发商项目招标,开发商采购信息" />
+    </bean>
+
+    <bean id="developerWithKeyword" class="com.mysoft.b2b.search.model.SearchTDK">
+        <property name="title" value="{0}-明源云采购" />
+        <property name="desc" value="找{0}，明源云采购为您提供{0}等信息和服务。" />
+        <property name="keyword" value="{0}" />
+    </bean>
+</beans>
